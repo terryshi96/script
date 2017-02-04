@@ -5,7 +5,7 @@ if [ $# != 1 ]; then
   exit 1
 fi
 pyscaffold -p $1 && cd $1 && touch requirements.txt
-cat >> setup.py << EOF
+cat > setup.py << EOF
 from setuptools import setup, find_packages
 import sys, os
 
