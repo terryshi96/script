@@ -5,4 +5,4 @@ if [ $# != 1 ]; then
   exit 1
 fi
 pyscaffold -p $1 && cd $1 && touch requirements.txt
-cd $1 && virtualenv --python=/usr/local/bin/python3.6 .venv && source .venv/bin/activate
+virtualenv --python=/usr/local/bin/python3.6 .venv && source .venv/bin/activate
