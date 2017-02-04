@@ -28,7 +28,7 @@ def generate_file():
     #cursor.fetchall() 这个例程获取所有查询结果（剩余）行，返回一个列表。空行时则返回空列表。
     #进行列表是否为空判断,不为空则构造xlsx表格
     if rows:
-         workbook = xlsxwriter.Workbook('/tmp/icc_data.xlsx')  # 建立文件
+         workbook = xlsxwriter.Workbook('/tmp/xxx.xlsx')  # 建立文件
          worksheet = workbook.add_worksheet()  # 建立sheet
          column = ["公司名称", "联系人名称", "联系人注册电话", "联系人注册邮件", "创建时间"]
          worksheet.write_row("A1",column)
