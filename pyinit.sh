@@ -9,14 +9,19 @@ cat > setup.py << EOF
 from setuptools import setup, find_packages
 import sys, os
 
-version = '0.1'
+version = '0.0.1'
+
+install_requires=[
+    # -*- Extra requirements: -*-
+],
+
+long_desc="""\
+""",
 
 setup(name='$1',
       version=version,
       description="",
-      long_description="""\
-""",
-      classifiers=[], # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
+      long_description=long_desc,
       keywords='',
       author='',
       author_email='',
@@ -24,13 +29,12 @@ setup(name='$1',
       license='',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
       include_package_data=True,
-      zip_safe=False,
-      install_requires=[
-          # -*- Extra requirements: -*-
-      ],
+      install_requires=install_requires,
       entry_points="""
       # -*- Entry points: -*-
       """,
+      classifiers=[],
       )
+#python setup.py sdist --formats=zip,gztar && python setup.py  register && python  setup.py sdist upload
 EOF
 virtualenv --python=/usr/local/bin/python3.6 .venv && source .venv/bin/activate
