@@ -14,6 +14,8 @@ num = 0
 
 
 def generate_file():
+    if os.path.isfile("/tmp/icc_data.xlsx"):
+         os.remove("/tmp/icc_data.xlsx")
     global num
     #获取当天日期
     today = time.strftime("%Y-%m-%d",time.localtime())
