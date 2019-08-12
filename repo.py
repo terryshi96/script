@@ -7,6 +7,7 @@ import commands
 import datetime
 
 def post_dingtalk(msg):
+    print('sending dingtalk message.....')
     os.system("curl %s -H 'Content-Type: application/json' \
         -d '{\"msgtype\": \"text\",\"text\": {\"content\": \" %s \"}}'"%(dingtalk_url, msg))
 
@@ -21,6 +22,7 @@ if __name__ == '__main__':
     project_path = base_path + project
     # create / finish 
     action = arg[2]
+    # tab / branch
     keep = arg[3]
     print(project,action,keep)
     current_tmp = commands.getstatusoutput('cd %s && git flow release list'%project_path)
@@ -42,14 +44,16 @@ if __name__ == '__main__':
                     post_dingtalk("Project %s release branch has been created\n release/%s"%(project, tag))
         elif action == 'finish':
             print('release ' + current + ' will be finished')
-            if keep == 'true':
-                flag=os.system('cd %s && git flow release finish -k -n -m %s -p %s && git push && git checkout develop && git branch -d release/%s'%(project_path, current, current, current))
+            if keep != 'tag':
+                flag=os.system('cd %s && git checkout release/%s && git pull && \
+                    git flow release finish -k -n -m %s -p %s && git push && git checkout develop && git branch -d release/%s'%(project_path, current, current, current, current))
             else:
-                flag=os.system('cd %s && git flow release finish -m %s -p %s'%(project_path, current, current))
+                flag=os.system('cd %s && git checkout release/%s && git pull && \
+                    git flow release finish -m %s -p %s'%(project_path, current, current, current))
             if flag == 0:
                 post_dingtalk("Project %s release branch release/%s has been finished\n "%(project, tag))
     else:
         os.system('cd %s && pwd && git status'%project_path)
-    print('\n End')
+    print('\nDone')
 
 
